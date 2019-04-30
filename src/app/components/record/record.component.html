@@ -9,7 +9,7 @@
     <img height="200" width="200" src="../../assets/smash_bros.png"/>
   </div>
   <div>
-    <form #setForm="ngForm" (ngSubmit)="onSubmit(set)">
+    <form #setForm="ngForm" (ngSubmit)="onSubmit(set); setForm.reset()">
       <div class="form-element-container">
         <label>Your Character:</label>
         <select class="form-control" name="userChar" [(ngModel)]="set.userChar">
@@ -50,7 +50,6 @@
         <input type="submit" value="Record">
       </div>
     </form>
-    {{setForm.value | json}}
   </div>
   <div *ngIf=setForm.value.oppChar>
     <img height="200" width="200" [src]='formatImage(setForm.value.oppChar)'/>
@@ -58,4 +57,7 @@
   <div *ngIf="!setForm.value.oppChar">
     <img height="200" width="200" src="../../assets/smash_bros.png"/>
   </div>
+</div>
+<div>
+  <li *ngFor="let set of sets | async"></li>
 </div>

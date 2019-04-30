@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Set } from '../../models/set.model'
+import { SetService } from '../../services/set.service'
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-record',
@@ -7,6 +9,8 @@ import { Set } from '../../models/set.model'
   styleUrls: ['./record.component.css']
 })
 export class RecordComponent implements OnInit {
+  constructor(private setService: SetService) { }
+
   set: Set = {
     userChar: null,
     oppChar: null,
@@ -16,18 +20,26 @@ export class RecordComponent implements OnInit {
     userID: null,
   }
 
-  formatImage(name){
-    return "../../assets/smash-icons/" + name.replace(/[^A-Z0-9]/ig, "") + ".png"
-  }
-
-  onSubmit(newSet: Set): void{
-    console.log(newSet)
-  }
-  
-  constructor() { }
+  sets: Observable<any[]>
 
   ngOnInit() {
+    console.log(this.setService.getSets());
   }
+
+  formatImage(name){
+    return "../../assets/smash-icons/" + name.replace(/[^A-Z0-9]/ig, "") + ".png";
+  }
+
+  create(newSet: Set){
+    this.setService.addSet(newSet);
+  }
+
+  onSubmit(setData: Set){
+    // console.log("Creating: ", setData)
+    this.create(setData);
+    alert("Your set was recorded");
+  }
+  
 
   characters: string[] = [
     "Bayonetta"

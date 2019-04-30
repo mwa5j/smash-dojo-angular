@@ -1,23 +1,38 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFireDatabase, AngularFireList } from  '@angular/fire/database';
 import { Set } from '../models/set.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SetService {
+    setsRef: AngularFireList<any>;
+    sets: Set[] = [];
 
-  constructor(private firestore: AngularFirestore) { }
+    constructor(db: AngularFireDatabase){
+      this.setsRef = db.list('sets')
+      this.setsRef.valueChanges().subscribe(res => {
+        for(var i = 0; i < res.length; i++){
+          var tempSet: Set = {
+            userChar: res[i].userChar,
+            oppChar: res[i].oppChar,
+            wins: res[i].wins, 
+            losses: res[i].losses, 
+            type: res[i].type,
+            userID: null,
+          }
+          this.sets.push(tempSet)
+        }
+      })
+      
+    }
 
-  getSets(){
-    return this.firestore.collection('sets').snapshotChanges();
-  }
+    addSet(newSet: Set){
+      this.setsRef.push(newSet);
+    }
 
-  createSet(set: Set){
-    return this.firestore.collection('sets').add(set);
-  }
-
-  deleteSet(setId: string){
-    this.firestore.doc('sets/' + setId).delete();
-  }
+    getSets(){
+      return this.sets;
+    }
+  
 }

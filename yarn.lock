@@ -164,7 +164,7 @@
   dependencies:
     tslib "^1.9.0"
 
-"@angular/fire@^5.1.2":
+"@angular/fire@5.1.2", "@angular/fire@^5.1.2":
   version "5.1.2"
   resolved "https://registry.yarnpkg.com/@angular/fire/-/fire-5.1.2.tgz#aaf98a3bad27bacbfe422d951bfa7c591abca775"
   integrity sha512-XTpS2+Vnw+poY5FmybOH5+iIgorIHnLH1/r/Zltt7iigvxajsTBPKD9wvxsT0/CtsDIOPB2ql9q0SJVK08iD1A==
@@ -760,6 +760,13 @@ amdefine@>=0.0.4:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/amdefine/-/amdefine-1.0.1.tgz#4a5282ac164729e93619bcfd3ad151f817ce91f5"
   integrity sha1-SlKCrBZHKek2Gbz9OtFR+BfOkfU=
+
+angularfire2@^5.1.2:
+  version "5.1.2"
+  resolved "https://registry.yarnpkg.com/angularfire2/-/angularfire2-5.1.2.tgz#6b7c76c3f581f2152db3417020a65a6ca101185c"
+  integrity sha512-vxbwB6Phl37oef22XKW9ZbWFVWb6/ok/w1OgGuv7MpHWmJCOUUl8pHeijd6SIuAk0HzNq31MUfwihpb08RAZNQ==
+  dependencies:
+    "@angular/fire" "5.1.2"
 
 ansi-colors@^3.0.0:
   version "3.2.4"
