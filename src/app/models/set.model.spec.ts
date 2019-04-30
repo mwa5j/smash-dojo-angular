@@ -1,4 +1,4 @@
-import { Set } from '../models/set.model';
+import { Set } from './set.model';
 
 describe('Set', () => {
   it('should create an instance', () => {

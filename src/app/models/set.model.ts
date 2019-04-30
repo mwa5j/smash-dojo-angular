@@ -1,9 +1,11 @@
 export class Set {
-    id: string;
-    userChar: string;
-    oppChar: string;
-    wins: number;
-    losses: number;
-    type: string;
-    userID: string;
+    constructor( 
+        public userChar: string,
+        public oppChar: string,
+        public wins: number,
+        public losses: number,
+        public type: string,
+        public userID: string,
+    ){}
+   
 }

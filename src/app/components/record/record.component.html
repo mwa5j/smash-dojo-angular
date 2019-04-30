@@ -1,3 +1,61 @@
-<p>
-  record works!
-</p>
+<div class="main-container">
+  <h2>Record your Set</h2>
+</div>
+<div class="main-container">
+  <div *ngIf=setForm.value.userChar>
+    <img height="200" width="200" [src]='formatImage(setForm.value.userChar)'/>
+  </div>
+  <div *ngIf="!setForm.value.userChar">
+    <img height="200" width="200" src="../../assets/smash_bros.png"/>
+  </div>
+  <div>
+    <form #setForm="ngForm" (ngSubmit)="onSubmit(set)">
+      <div class="form-element-container">
+        <label>Your Character:</label>
+        <select class="form-control" name="userChar" [(ngModel)]="set.userChar">
+          <option selected hidden value="">--</option>
+          <option *ngFor="let char of characters" 
+            [value]="char">
+            {{char}}
+          </option>
+        </select>
+      </div>
+      <div class="form-element-container">
+        <label>Opponent's Character:</label>
+        <select class="form-control" name="oppChar" [(ngModel)]="set.oppChar">
+          <option *ngFor="let char of characters" [value]="char">
+            {{char}}
+          </option>
+        </select>
+      </div>
+      <div class="form-element-container">
+        <label>Number of Wins:</label>
+        <input type="number" name="wins" [(ngModel)]="set.wins" placeholder="0" />
+      </div>
+      <div class="form-element-container">
+        <label>Number of Losses:</label>
+        <input type="number" name="losses" [(ngModel)]="set.losses" placeholder="0" />
+      </div>
+      <div class="form-element-container">
+        <label>Type of Set:</label>
+        <select class="form-control" name="type" [(ngModel)]="set.type">
+          <option selected hidden disabled value=""></option>
+          <option value="offline">Offline</option>
+          <option value="online">Online</option>
+          <option value="elite">Elite Smash</option>
+          <option value="tourney">Tournament</option>
+        </select>
+      </div>
+      <div class="form-element-container">
+        <input type="submit" value="Record">
+      </div>
+    </form>
+    {{setForm.value | json}}
+  </div>
+  <div *ngIf=setForm.value.oppChar>
+    <img height="200" width="200" [src]='formatImage(setForm.value.oppChar)'/>
+  </div>
+  <div *ngIf="!setForm.value.oppChar">
+    <img height="200" width="200" src="../../assets/smash_bros.png"/>
+  </div>
+</div>
