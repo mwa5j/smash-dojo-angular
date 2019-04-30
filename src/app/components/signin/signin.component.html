@@ -1,0 +1,18 @@
+<div class="main-container">
+  <h2>Sign In</h2>
+</div>
+<div class="main-container">
+  <form #signInForm="ngForm" (ngSubmit)="signIn(user)">
+    <div class="form-element-container">
+      <label>Email:</label>
+      <input type="email" name="email" [(ngModel)]="user.email" />
+    </div>
+    <div class="form-element-container">
+      <label>Password:</label>
+      <input type="password" name="password" [(ngModel)]="user.password" />
+    </div>
+    <div class="form-element-container">
+      <input type="submit" value="Sign In"/>
+    </div>
+  </form>
+</div>

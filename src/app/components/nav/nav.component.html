@@ -1,8 +1,11 @@
-<div class="list-container">
+<div class="list-container" *ngIf=(!isLoggedIn())>
   <a class="list-content" routerLink="/signin">Sign In</a>
   <a class="list-content" routerLink="/signup">Sign Up</a>
-  <a class="list-content" routerLink="/data">Data</a>
-  <a class="list-content" routerLink="/record">Record</a>
   <a class="list-content" routerLink="/">Landing</a>
 </div>
+<div class="list-container" *ngIf=(isLoggedIn())>
+    <a class="list-content" routerLink="/data">Data</a>
+    <a class="list-content" routerLink="/record">Record</a>
+    <a class="list-content" routerLink="/" (click)="signOut()">Sign Out</a>
+  </div>
   

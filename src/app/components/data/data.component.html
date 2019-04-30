@@ -1,3 +1,6 @@
-<p>
-  data works!
-</p>
+<div class="main-container">
+  <li *ngFor="let set of sets">
+    <b *ngIf="(set.wins > set.losses) && (set.userID == checkUser())"> You played {{set.userChar}} against {{set.oppChar}} and won {{set.wins}} to {{set.losses}}</b>
+    <b *ngIf="(set.wins < set.losses) && (set.userID == checkUser())"> You played {{set.userChar}} against {{set.oppChar}} and lost {{set.wins}} to {{set.losses}}</b>
+  </li>
+</div>

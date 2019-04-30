@@ -1,0 +1,8 @@
+.main-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: right;
+    flex-direction: column;
+}
+

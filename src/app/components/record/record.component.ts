@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Set } from '../../models/set.model'
 import { SetService } from '../../services/set.service'
-import { Observable } from 'rxjs';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-record',
@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
   styleUrls: ['./record.component.css']
 })
 export class RecordComponent implements OnInit {
-  constructor(private setService: SetService) { }
+  constructor(private setService: SetService, private userService: UserService) { }
 
   set: Set = {
     userChar: null,
@@ -17,10 +17,8 @@ export class RecordComponent implements OnInit {
     wins: 0, 
     losses: 0, 
     type: null,
-    userID: null,
+    userID: this.userService.getUserDetails(),
   }
-
-  sets: Observable<any[]>
 
   ngOnInit() {
     console.log(this.setService.getSets());
@@ -40,7 +38,6 @@ export class RecordComponent implements OnInit {
     alert("Your set was recorded");
   }
   
-
   characters: string[] = [
     "Bayonetta"
     ,"Bowser"

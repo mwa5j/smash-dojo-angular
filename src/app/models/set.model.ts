@@ -6,6 +6,5 @@ export class Set {
         public losses: number,
         public type: string,
         public userID: string,
-    ){}
-   
+    ){}  
 }
