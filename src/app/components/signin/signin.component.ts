@@ -20,7 +20,7 @@ export class SigninComponent implements OnInit {
   }
 
   signIn(signInUser: User){
-    return this.userService.signInWithEmail(signInUser.email, signInUser.password);
+    return this.userService.signIn(signInUser.email, signInUser.password);
   }
 
 

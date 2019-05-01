@@ -6,5 +6,7 @@ export class Set {
         public losses: number,
         public type: string,
         public userID: string,
+        public date: number,
+        public month: number
     ){}  
 }

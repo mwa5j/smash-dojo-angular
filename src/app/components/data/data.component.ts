@@ -15,11 +15,12 @@ export class DataComponent implements OnInit {
   sets: Set[] = []
     
   ngOnInit() {
-    this.sets = this.setService.getSets();
+    console.log("Retrieving sets for: ", this.userService.userDetails())
+    this.sets = this.setService.getSets(this.userService.userDetails())
   }
 
-  checkUser(){
-    return this.userService.getUserDetails();
-  }
+  // checkUser(){
+  //   // return this.userService.getUserDetails();
+  // }
 
 }

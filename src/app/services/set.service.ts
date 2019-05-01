@@ -9,32 +9,37 @@ import { UserService } from './user.service';
 export class SetService {
     setsRef: AngularFireList<any>;
     sets: Set[] = [];
+    user_sets: Set[] = [];
 
     constructor(db: AngularFireDatabase, private userService: UserService){
-      this.setsRef = db.list('sets')
-      this.setsRef.valueChanges().subscribe(res => {
-        for(var i = 0; i < res.length; i++){
-          var tempSet: Set = {
-            userChar: res[i].userChar,
-            oppChar: res[i].oppChar,
-            wins: res[i].wins, 
-            losses: res[i].losses, 
-            type: res[i].type,
-            userID: this.userService.getUserDetails(),
-          }
-          this.sets.push(tempSet)
-        }
-      })
-      
+      this.setsRef = db.list('sets');
     }
 
     addSet(newSet: Set){
       this.setsRef.push(newSet);
     }
 
-    getSets(){
-      console.log(this.sets);
-      return this.sets;
+    getSets(username: string){
+      var userSets: Set[] = [];
+
+      this.setsRef.valueChanges().subscribe(res => {
+        for(var i = 0; i < res.length; i++){
+            if(username == res[i].userID){
+            var tempSet: Set = {
+              userChar: res[i].userChar,
+              oppChar: res[i].oppChar,
+              wins: res[i].wins, 
+              losses: res[i].losses, 
+              type: res[i].type,
+              userID: res[i].userID,
+            }
+            console.log("Database retrieval: ", tempSet)
+            userSets.push(tempSet)
+          }
+        }
+      })
+      return userSets;
+
     }
   
 }

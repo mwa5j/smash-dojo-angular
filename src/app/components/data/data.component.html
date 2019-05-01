@@ -1,6 +1,10 @@
 <div class="main-container">
-  <li *ngFor="let set of sets">
-    <b *ngIf="(set.wins > set.losses) && (set.userID == checkUser())"> You played {{set.userChar}} against {{set.oppChar}} and won {{set.wins}} to {{set.losses}}</b>
-    <b *ngIf="(set.wins < set.losses) && (set.userID == checkUser())"> You played {{set.userChar}} against {{set.oppChar}} and lost {{set.wins}} to {{set.losses}}</b>
-  </li>
+  <div *ngIf="sets.length != 0">
+    <li *ngFor="let set of sets">
+      <b *ngIf="(set.wins > set.losses)"> You played {{set.userChar}} against {{set.oppChar}} and won {{set.wins}} to {{set.losses}}</b>
+      <b *ngIf="(set.wins < set.losses)"> You played {{set.userChar}} against {{set.oppChar}} and lost {{set.wins}} to {{set.losses}}</b>
+      <b *ngIf="(set.wins == set.losses)"> You played {{set.userChar}} against {{set.oppChar}} and tied {{set.wins}} to {{set.losses}}</b>
+    </li>
+  </div>
+  <p *ngIf="sets.length == 0">No sets</p>
 </div>

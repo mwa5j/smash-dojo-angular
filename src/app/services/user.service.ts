@@ -1,62 +1,48 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { AngularFireAuth } from 'angularfire2/auth';
-import * as firebase from 'firebase/app';
-import { Observable } from 'rxjs';
+import { auth } from 'firebase/app';
+import { AngularFireAuth } from '@angular/fire/auth'
+import { User } from 'firebase';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-  private user: Observable<firebase.User>;
-  private userDetails: string = null;
+  user: User;
 
-  constructor(private _firebaseAuth: AngularFireAuth, private router: Router) {
-    this.user = _firebaseAuth.authState;
-  
-    this.user.subscribe(
-      (user) => {
-        if(user) {
-          this.userDetails = user.email;
-          console.log(this.userDetails);
-        }
-        else{
-          this.userDetails = null;
-          console.log("No one is home")
-        }
-      }  
-    );
-  }
-
-  signInWithEmail(email, password){
-    this._firebaseAuth.auth.signInWithEmailAndPassword(email, password)
-    .then(() => {
-      this.router.navigate(['/record']);
+  constructor(public afAuth: AngularFireAuth, private router: Router){
+    this.afAuth.authState.subscribe(user => {
+      if(user){
+        this.user = user;
+        localStorage.setItem('user', JSON.stringify(this.user));
+      } else {
+        localStorage.setItem('user', null);
+      }
     })
   }
 
-  createAccountWithEmail(email, password){
-    this._firebaseAuth.auth.createUserWithEmailAndPassword(email, password)
-    .then(() => {
-      this.router.navigate(['/record']);
-    })
-  }
-
-  isLoggedIn(){
-    if(this.userDetails == null){
-      return false;
-    } else {
-      return true;
+  async signIn(email: string, password: string){
+    try{
+      await this.afAuth.auth.signInWithEmailAndPassword(email, password);
+      this.router.navigate(['record']);
+    } catch (e) {
+      alert(e.message);
     }
   }
 
-  signOut() {
-    console.log("Bye")
-    this._firebaseAuth.auth.signOut()
-    .then(() => this.router.navigate(['/']))
+  async signOut(){
+    await this.afAuth.auth.signOut();
+    localStorage.removeItem('user');
+    this.router.navigate(['']);
   }
 
-  getUserDetails(){
-    return this.userDetails;
+  isLoggedIn(): boolean {
+    const user = JSON.parse(localStorage.getItem('user'));
+    return user != null;
+  }
+
+  userDetails(): string {
+    var user = JSON.parse(localStorage.getItem('user'));
+    return user.email;
   }
 }

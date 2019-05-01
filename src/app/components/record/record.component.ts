@@ -10,6 +10,8 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class RecordComponent implements OnInit {
   constructor(private setService: SetService, private userService: UserService) { }
+  userEmail: string = null; 
+  currentDate: Date =  new Date();
 
   set: Set = {
     userChar: null,
@@ -17,11 +19,13 @@ export class RecordComponent implements OnInit {
     wins: 0, 
     losses: 0, 
     type: null,
-    userID: this.userService.getUserDetails(),
+    userID: this.userService.userDetails(),
+    date: this.currentDate.getDate(),
+    month: this.currentDate.getMonth(),
   }
 
-  ngOnInit() {
-    console.log(this.setService.getSets());
+  ngOnInit(){
+    this.userEmail = this.userService.userDetails();
   }
 
   formatImage(name){
