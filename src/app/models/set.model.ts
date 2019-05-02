@@ -7,6 +7,7 @@ export class Set {
         public type: string,
         public userID: string,
         public date: number,
-        public month: number
+        public month: number,
+        public key, string,
     ){}  
 }

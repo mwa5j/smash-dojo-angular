@@ -1,10 +1,53 @@
 <div class="main-container">
+    <div class="header-container">
+        <div class="text-data">
+          <b>You</b>
+        </div>
+        <div class="text-data">
+          <b>Result</b>
+        </div>
+        <div class="text-data">
+          <b>Opp</b>
+        </div>
+        <div class="text-data">
+          <b>Type</b>
+        </div>
+        <div class="text-data">
+          <b>Date</b>
+        </div>
+        <div class="text-data">
+          <b>Update</b>
+        </div>
+        <div class="text-data">
+          <b>Delete</b>
+        </div>
+      </div>
   <div *ngIf="sets.length != 0">
-    <li *ngFor="let set of sets">
-      <b *ngIf="(set.wins > set.losses)"> You played {{set.userChar}} against {{set.oppChar}} and won {{set.wins}} to {{set.losses}}</b>
-      <b *ngIf="(set.wins < set.losses)"> You played {{set.userChar}} against {{set.oppChar}} and lost {{set.wins}} to {{set.losses}}</b>
-      <b *ngIf="(set.wins == set.losses)"> You played {{set.userChar}} against {{set.oppChar}} and tied {{set.wins}} to {{set.losses}}</b>
-    </li>
+    <div *ngFor="let set of sets">
+        <div class="data-container">
+          <img [src]='formatImage(set.userChar)' height="50" width="50" />
+          <div *ngIf="(set.wins > set.losses)" class="text-data">
+            <b>Win</b>
+          </div>
+          <div *ngIf="(set.wins < set.losses)" class="text-data">
+            <b>Loss</b>
+          </div>
+          <div *ngIf="(set.wins == set.losses)" class="text-data">
+            <b>Tie</b>
+          </div>
+          <img [src]='formatImage(set.oppChar)' height="50" width="50" />
+          <div class="text-data">
+            <b>{{set.type}}</b>
+          </div>
+          <div class="text-data">
+            <b>{{set.month + 1}}/{{set.date}}</b>
+          </div>
+          <img (click)="updateSet(set.key)" class="img-data" src="../../../assets/icons/icons8-update-32.png" width="20" height="20">
+          <img (click)="deleteSet(set.key)" class="img-data" src="../../../assets/icons/icons8-cancel-32.png" width="20" height="20">
+        </div>
+    </div>
   </div>
-  <p *ngIf="sets.length == 0">No sets</p>
+  <div class="footer-container" *ngIf="sets.length == 0">
+    <b>No sets found</b>
+  </div>
 </div>

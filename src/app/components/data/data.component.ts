@@ -16,11 +16,19 @@ export class DataComponent implements OnInit {
     
   ngOnInit() {
     console.log("Retrieving sets for: ", this.userService.userDetails())
-    this.sets = this.setService.getSets(this.userService.userDetails())
+    this.sets = this.setService.readSetList(this.userService.userDetails())
   }
 
-  // checkUser(){
-  //   // return this.userService.getUserDetails();
-  // }
+  formatImage(name){
+    return "../../assets/smash-icons/" + name.replace(/[^A-Z0-9]/ig, "") + ".png";
+  }
 
+  updateSet(key: string){
+    alert("Updated")
+  }
+
+  deleteSet(key: string){
+    this.setService.deleteSet(key);
+    this.sets = this.setService.readSetList(this.userService.userDetails())
+  }
 }

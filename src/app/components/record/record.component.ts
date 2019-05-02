@@ -22,6 +22,7 @@ export class RecordComponent implements OnInit {
     userID: this.userService.userDetails(),
     date: this.currentDate.getDate(),
     month: this.currentDate.getMonth(),
+    key: null,
   }
 
   ngOnInit(){
@@ -33,7 +34,7 @@ export class RecordComponent implements OnInit {
   }
 
   create(newSet: Set){
-    this.setService.addSet(newSet);
+    this.setService.createSet(newSet);
   }
 
   onSubmit(setData: Set){

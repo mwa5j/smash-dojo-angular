@@ -20,6 +20,6 @@ export class SignupComponent implements OnInit {
   }
 
   signUp(signUpUser: User){
-    return this.userService.createAccountWithEmail(signUpUser.email, signUpUser.password);
+    return this.userService.createAccount(signUpUser.email, signUpUser.password);
   }
 }

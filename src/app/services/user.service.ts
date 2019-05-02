@@ -30,6 +30,15 @@ export class UserService {
     }
   }
 
+  async createAccount(email: string, password: string){
+    try{
+      await this.afAuth.auth.createUserWithEmailAndPassword(email, password);
+      this.router.navigate(['record']);
+    } catch (e) {
+      alert(e.message);
+    }
+  }
+
   async signOut(){
     await this.afAuth.auth.signOut();
     localStorage.removeItem('user');
